@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instant Meditation</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .meditation-step {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: none;
+        }
+        .active-step {
+            display: block;
+        }
+        .progress-bar {
+            height: 5px;
+            background: #e0e0e0;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .progress {
+            height: 100%;
+            background: #4CAF50;
+            width: 0%;
+            border-radius: 5px;
+            transition: width 0.3s ease;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 15px;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        h1 {
+            color: #2E7D32;
+            text-align: center;
+        }
+        h2 {
+            color: #388E3C;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        .breath-animation {
+            width: 100px;
+            height: 100px;
+            background: #C8E6C9;
+            border-radius: 50%;
+            margin: 20px auto;
+            animation: breathe 6s infinite ease-in-out;
+        }
+        @keyframes breathe {
+            0% { transform: scale(0.9); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(0.9); }
+        }
+        .energy-center {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: inline-block;
+            margin: 10px;
+            position: relative;
+        }
+        .energy-center::after {
+            content: attr(data-name);
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+        }
+        .visualization-item {
+            padding: 10px;
+            margin: 5px 0;
+            background: #E8F5E9;
+            border-radius: 5px;
+        }
+        .completion-screen {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        .completion-screen h1 {
+            color: #2E7D32;
+        }
+        .timer {
+            font-size: 24px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .senses-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .visualization-container {
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Instant Meditation</h1>
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+        
+        <!-- Step 1: Body (Buddha) -->
+        <div class="meditation-step active-step" id="step1">
+            <h2>1. Body (Buddha)</h2>
+            <p>Focus on your breath. Watch your full body with awareness.</p>
+            <div class="breath-animation"></div>
+            <div class="timer">00:30</div>
+            <p>As you breathe in, feel your body expand. As you breathe out, feel your body relax.</p>
+            <button onclick="nextStep()">Continue</button>
+        </div>
+        
+        <!-- Step 2: Senses -->
+        <div class="meditation-step" id="step2">
+            <h2>2. Senses</h2>
+            <p>Focus on your 10 senses (5 external + 5 internal) then move through energy centers:</p>
+            <div class="senses-container">
+                <div class="energy-center" style="background: #EF5350;" data-name="Muladhar (Brahma)"></div>
+                <div class="energy-center" style="background: #42A5F5;" data-name="Heart (Vishnu)"></div>
+                <div class="energy-center" style="background: #FFFFFF; border: 2px solid #78909C;" data-name="Penile (Maheshwar)"></div>
+            </div>
+            <div class="timer">00:45</div>
+            <p>Visualize energy moving upward from base to crown, awakening each center.</p>
+            <button onclick="nextStep()">Continue</button>
+        </div>
+        
+        <!-- Step 3: Mind (Visuddha) -->
+        <div class="meditation-step" id="step3">
+            <h2>3. Mind (Visuddha)</h2>
+            <p>Focus on time: duty & destiny. This is your Dharmakhetra.</p>
+            <div class="visualization-container">
+                <p>Visualize:</p>
+                <div class="visualization-item">5 things you love to see</div>
+                <div class="visualization-item">4 things you love to touch</div>
+                <div class="visualization-item">3 things you love to listen</div>
+                <div class="visualization-item">2 things you love to smell</div>
+                <div class="visualization-item">1 thing you love to eat</div>
+            </div>
+            <div class="timer">01:00</div>
+            <p>Remember: Actions are louder than voice. Don't debate & waste time.</p>
+            <button onclick="nextStep()">Continue</button>
+        </div>
+        
+        <!-- Step 4: Intelligence (Niaymya) -->
+        <div class="meditation-step" id="step4">
+            <h2>4. Intelligence (Niaymya)</h2>
+            <p>Apply correct amount of thinking energy as needed.</p>
+            <div class="visualization-container">
+                <div class="visualization-item">Don't get stuck in quicksand of overthinking</div>
+                <div class="visualization-item">Follow a hero (like God Ram) but don't blindly</div>
+                <div class="visualization-item">Run ahead and let the world follow you</div>
+                <div class="visualization-item">Learn from books/past/experiences</div>
+                <div class="visualization-item">Connect the dots & plan for the future</div>
+            </div>
+            <div class="timer">00:45</div>
+            <button onclick="nextStep()">Continue</button>
+        </div>
+        
+        <!-- Step 5: Soul -->
+        <div class="meditation-step" id="step5">
+            <h2>5. Soul</h2>
+            <p>Success is progressive realization of a worthy ideal.</p>
+            <div class="visualization-container">
+                <div class="visualization-item">Surrender to God only so you don't need to surrender to humans</div>
+                <div class="visualization-item">Visualize your spiritual progress</div>
+                <div class="visualization-item">Connect with your deepest purpose</div>
+            </div>
+            <div class="timer">00:30</div>
+            <button onclick="nextStep()">Continue</button>
+        </div>
+        
+        <!-- Step 6: Paramatma (Consciousness) -->
+        <div class="meditation-step" id="step6">
+            <h2>6. Paramatma (Consciousness)</h2>
+            <p>People are jealous - find your edge and strengthen it.</p>
+            <div class="visualization-container">
+                <div class="visualization-item">See your next role and promote yourself</div>
+                <div class="visualization-item">Fashion & style - mark your impression</div>
+                <div class="visualization-item">Identify givers & takers in your life</div>
+                <div class="visualization-item">Respect & obey great people</div>
+                <div class="visualization-item">Manage small events to ride the power ladder</div>
+            </div>
+            <div class="timer">01:00</div>
+            <button onclick="completeMeditation()">Complete Meditation</button>
+        </div>
+        
+        <!-- Completion Screen -->
+        <div class="meditation-step" id="completion-screen">
+            <div class="completion-screen">
+                <h1>Meditation Complete</h1>
+                <p>You've successfully completed your practice.</p>
+                <p>Carry this awareness into your daily activities.</p>
+                <button onclick="restartMeditation()">Start Again</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 6;
+        let timers = [];
+        
+        function initializeMeditation() {
+            // Hide all steps except first
+            document.querySelectorAll('.meditation-step').forEach(step => {
+                step.style.display = 'none';
+            });
+            document.getElementById('step1').style.display = 'block';
+            document.getElementById('progress').style.width = `${(1/totalSteps)*100}%`;
+            
+            // Set up timers for each step
+            const stepTimes = [30, 45, 60, 45, 30, 60]; // in seconds
+            document.querySelectorAll('.timer').forEach((timer, index) => {
+                timer.textContent = formatTime(stepTimes[index]);
+            });
+        }
+        
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }
+        
+        function nextStep() {
+            // Stop any running timer for current step
+            if (timers[currentStep-1]) {
+                clearInterval(timers[currentStep-1]);
+            }
+            
+            document.getElementById(`step${currentStep}`).style.display = 'none';
+            currentStep++;
+            
+            if(currentStep <= totalSteps) {
+                document.getElementById(`step${currentStep}`).style.display = 'block';
+                document.getElementById('progress').style.width = `${(currentStep/totalSteps)*100}%`;
+                startTimer(currentStep-1);
+            }
+        }
+        
+        function startTimer(stepIndex) {
+            const timerElement = document.querySelectorAll('.timer')[stepIndex];
+            let timeLeft = parseInt(timerElement.textContent.split(':')[0]) * 60 + 
+                          parseInt(timerElement.textContent.split(':')[1]);
+            
+            timers[stepIndex] = setInterval(() => {
+                timeLeft--;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timers[stepIndex]);
+                    if (stepIndex+1 === totalSteps) {
+                        completeMeditation();
+                    } else {
+                        nextStep();
+                    }
+                    return;
+                }
+                
+                timerElement.textContent = formatTime(timeLeft);
+            }, 1000);
+        }
+        
+        function completeMeditation() {
+            document.querySelectorAll('.meditation-step').forEach(step => {
+                step.style.display = 'none';
+            });
+            document.getElementById('completion-screen').style.display = 'block';
+            document.getElementById('progress').style.width = '100%';
+            
+            // Clear all timers
+            timers.forEach(timer => {
+                if (timer) clearInterval(timer);
+            });
+        }
+        
+        function restartMeditation() {
+            currentStep = 1;
+            document.getElementById('completion-screen').style.display = 'none';
+            initializeMeditation();
+        }
+        
+        // Initialize the meditation when page loads
+        window.onload = initializeMeditation;
+    </script>
+</body>
+</html>
